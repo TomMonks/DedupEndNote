@@ -77,14 +77,19 @@ def remove_by_criteria(records, c_index):
     return unique
             
 
-def read_records(fileName):
+def read_records(fileName, authorFunc = None):
     """ Read references from a file Return list of references """
+
+    if authorFunc == None:
+        def authorFunc(x): return x
     
     try:
         f = open(fileName + '.txt', 'r')
     except IOError as e:
         print "Error accessing file.  Please make sure that filename is correct."#
         sys.exit()
+
+    
 
     curr_record = []
     likely_details = ()
@@ -135,8 +140,9 @@ def read_records(fileName):
 
         elif line[0:2] == '%A':
             
-            authors = ''.join([authors, line[3:line.find(',')].lower()])
-            
+            #authors = ''.join([authors, line[3:line.find(',')].lower()])
+            authors = ''.join([authors, authorFunc(line[3:])])
+
         elif line[0:2] == '%P':
 
             pages = line[3:len(line)-1]
@@ -161,10 +167,14 @@ def output_records(fileName, postFix, all_records):
     
 
 
+def truncate_first_initial(author):
+    """truncates author name to surname+ 1st intial only + strips punct snd whitespace returns string"""
+    return remove_punct(author[:author.find(' ')+2]).lower()
 
 
-
-
+def truncate_surname(author):
+    """truncates author to surname only return string"""
+    return author[3:author.find(',')].lower()
     
 
 
