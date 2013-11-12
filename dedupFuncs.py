@@ -177,9 +177,8 @@ def truncate_surname(author):
     return author[3:author.find(',')].lower()
     
 
-
-
-
-
-
+class DedupFuncContainer():
+    """Container for deduplication preferences"""
+    def __init__(self):
+        self.authorFunc = truncate_surname
     
