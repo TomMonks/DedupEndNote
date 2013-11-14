@@ -1,6 +1,6 @@
 #--------------------------------------------------------------------
 #
-#   Module:         dedup
+#   Module:         dedupFuncs
 #   Description:    Simple script for removing duplicate EndNote entries
 #   Author:         T.Monks
 #   Python ver:     2.7.2
